@@ -1,0 +1,466 @@
+.App {
+  display: flex;
+  justify-content:safe;
+  align-items: center;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+
+ flex-direction: column;
+  }
+
+
+ 
+
+body {
+  background: rgb(83, 99, 243);
+ 
+  background-size: cover;
+  background-position:center;
+  background-attachment: fixed;
+  background-image:url('./images/DeroIslandsLogo3.jpg');
+  text-align:center;
+  
+  
+}
+
+ .function-container {
+  top:10vw;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+ justify-content:center;
+ display: flex;
+ flex-direction: column;
+ height: fit-content;
+ 
+ 
+ position: absolute;
+} 
+
+.function form {
+  position:inherit;
+  
+  
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+ justify-content:center;
+ display: flex;
+ flex-direction: column;
+ 
+
+}
+
+.card-grid {
+  
+  
+  
+ 
+  
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+ border-width: 1px;
+ border-style:inset;
+
+ max-width:60vw;
+ 
+ 
+ min-width:40vw;
+ height:auto;
+ overflow:visible;
+ 
+ align-items:center;
+ justify-content:center;
+ display:flex;
+ flex-flow: wrap;
+ 
+ 
+ position:relative;
+ 
+}
+
+.card-card{
+  display:flex;
+  flex-direction:column;
+}
+
+input[type="checkbox"]
+{
+    vertical-align:middle;
+}
+.tierList {
+  display:flex;
+  flex-direction: row;
+  
+  
+}
+ul{
+  list-style:none;
+}
+
+.function {
+  
+  background: linear-gradient( rgba(255, 255, 255, 0.8), rgba(231, 196, 196, 0.45) );
+  
+  border-radius: 5%;
+  margin-top: 10vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+ border-width: 1px;
+ border-style:inset;
+ border-color:blue;
+ max-width:fit-content;
+ 
+ min-width:40vw;
+ height:auto;
+ overflow:visible;
+ 
+ align-items:center;
+ justify-content:center;
+ display: flex;
+ flex-direction: column;
+ 
+ position:relative;
+ 
+}
+
+.function input {
+  display:list-item;
+  
+}
+
+.function a {
+  color:black;
+}
+
+.function p {
+  max-width:800px;
+  font-family:"Lucida Console", "Courier New", monospace;
+  
+  
+}
+
+a {
+  margin:30px;
+  color:white;
+
+  
+}
+
+
+
+.logo {
+  cursor:pointer;
+  font-family:fantasy;
+  margin:20px;
+}
+
+.menu {
+  
+  /*
+  background: url("https://www.publicdomainpictures.net/pictures/250000/velka/large-green-fan-palm-leaf.jpg");
+  */
+  background:none;
+ /* position:absolute(top);*/
+ position: absolute(top);
+display: inline-block;
+  padding:0px;
+  margin:0px;
+  margin-bottom:20px;
+  font-size: 25pt;
+  /*
+  width:100vw;
+  */
+  
+}
+
+.menu ul{
+  list-style:none;
+  margin: 0px;
+  padding: 0px;
+  
+  
+}
+
+.menu li{
+  position: relative;
+  display: inline-block;
+  margin-bottom:0px;
+  margin-top: 0px;
+  margin-left:10px;
+  margin-right:10px;
+  padding: 0px;
+  cursor:pointer;
+  
+}
+
+footer {
+  color:white;
+}
+
+.exclusive-post {
+  border-style:dashed;
+  margin:10px;
+}
+
+.ProfileCard {
+  border-style:dashed;
+  cursor:pointer;
+  
+  border-color: rgba(7, 145, 80, 0.65);
+  width:auto;
+}
+
+.profile img{
+  width:120px;
+  height: 180px;
+  border-radius:50%;
+  
+  
+}
+
+.icons {
+  align-items:center;
+  justify-content:center;
+  display: flex;
+  flex-direction: row;
+  
+  position:relative;
+}
+
+.icons img {
+  width:5vw;
+  height: 5vw;
+}
+.icons-treasure,.icons-mail,.icons-signal:hover{
+  cursor: pointer;
+}
+
+.mytreasure {
+  overflow-x:auto;
+}
+
+
+.icons-treasure{
+  background-image:url('./images/DeroIslands-Treasure_Chest1_400.png');
+  
+ background-position:center;
+  background-size: 8vw 8vw;
+  margin:2vw;
+  margin-top:0;
+  margin-bottom:0;
+  padding:1vw;
+  width:8vw;
+  height:8vw;
+  box-sizing:border-box;
+  display:flex;
+}
+
+.icons-signal{
+  background-image:url('./images/DeroIslands-Smoke_Signals1_400.png');
+ background-position:center;
+  background-size: 8vw 8vw;
+  margin:2vw;
+  margin-top:0;
+  margin-bottom:0;
+  padding:1vw;
+  width:8vw;
+  height:8vw;
+  box-sizing:border-box;
+  display:flex;
+}
+.icons-mail{
+  background-image:url('./images/DeroIslandsLogo3.jpg');
+ background-position:center;
+  background-size: 8vw 8vw;
+  margin:2vw;
+  margin-top:0; 
+  margin-bottom:0;
+  padding:1vw;
+  width:8vw;
+  height:8vw;
+  box-sizing:border-box;
+  display:flex;
+  }
+.icons-text{
+  margin-left:auto;
+  margin-right:auto;
+  align-self:flex-end;
+}
+
+.post img{
+  width:300px;
+  height:300px;
+}
+
+.profile p{
+  
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.ProfileCard img{
+  width:120px;
+  height: auto;
+  border-radius:50%;
+  
+}
+
+.PostCard {
+  border-style:dashed;
+  cursor:pointer;
+}
+
+.subscribe {
+  border-style:groove;
+  margin:5px;
+} 
+
+
+
+.constitution p, .constitution h2{
+width:300px;
+}
+
+.constitution h2 {
+color:white;
+margin-top:50px;
+
+}
+
+.status-selector ul{
+list-style:none;
+display:flex;
+flex-direction:row;
+
+
+
+}
+
+
+.status-selector ul li {
+  margin-left:5vw;
+  margin-right:5vw;
+  
+}
+
+.status-selector ul li:hover{
+  cursor:pointer;
+}
+
+.navbar {
+
+  z-index: 10;
+  position:absolute;
+  top:5vw;
+  display:flex;
+  flex-direction:row;
+}
+
+ small:hover{
+cursor:pointer;
+}
+
+.rpc-bridge-data {
+  position:fixed;
+  top:10vw;
+  margin-left:80vw;
+}
+
+.cocos {
+  position: fixed;
+  top:20vw;
+  margin-left:80vw;
+}
+
+
+
+.bridgeInitText {
+  max-width:fit-content;
+  background: rgba(57, 119, 16, 0.75);
+  margin-top:20px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+ justify-content:center;
+ display: flex;
+ flex-direction: column;
+}
+
+input[type=button], input[type=submit], input[type=reset], button{
+  background-color: #4658ff;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  box-shadow: 1px 2px #000000;
+}
+
+button:active{
+  box-shadow:none;
+}
+
+input[type=text], input[type=password] {
+  
+padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+border: 3px solid #ccc;
+-webkit-transition: 0.5s;
+transition: 0.5s;
+outline: none;
+
+  
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  border: 3px solid #555;
+}
+
+.menu-item {
+  position: relative;
+display: inline-block;
+}
+
+
+.menu-item:hover .submenu{
+  display:block;
+
+}
+
+.submenu {
+  display: none;
+position:absolute;
+background-color: rgb(224, 211, 167);
+padding:0px;
+margin:0px;
+
+
+z-index: 1;
+}
+
+.submenu li:hover {
+    background-color:rgba(103, 159, 223, 0.65);
+}
+
+.submenu li {
+    width:100%;
+    padding: 0;
+    margin:0;
+  
+}
+
+.error {
+  background-color:rgba(7, 145, 80, 0.65);
+  color:red;
+}
+
+.availabilityCheck:hover {
+  cursor:pointer;
+}
