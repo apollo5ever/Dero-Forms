@@ -9,13 +9,28 @@ import to from 'await-to-js';
 
 
 
-export default function PublishPost(){
+export default function Form(){
 
 
 
 const [searchParams,setSearchParams] = useSearchParams()
 const [state,setState] = React.useContext(LoginContext)
+const params = useParams()
+const cid = params.cid
+const [form,setForm] = React.useState(null)
 
+React.useEffect(()=>{
+  getForm()
+  
+},[state.ipfs])
+
+const getForm = async ()=>{
+  for await (const buf of state.ipfs.cat(cid.toString())){
+    let form = JSON.parse(buf.toString())
+    console.log(form)
+    setForm(form)
+  }
+}
   
 
 
@@ -29,13 +44,16 @@ const [state,setState] = React.useContext(LoginContext)
 
 
     const post = {
-      discord:e.target.discord.value,
-      pexp:e.target.pexp.value,
-      english:e.target.english.value,
-      rexp:e.target.rexp.value,
-      dexp:e.target.dexp.value,
-      hope:e.target.hope.value
+      address: state.userAddress,
+      title:form.title,
+      responses:[]
   }
+
+  for(var i=0; i<form.questions.length;i++){
+    console.log(e.target[`question_${i}`].value)
+    post.responses.push(new Object({question:form.questions[i].question,response:e.target[`question_${i}`].value}))
+  }
+
   const key = CryptoJS.lib.WordArray.random(32).toString()
   console.log(key)
 
@@ -75,7 +93,7 @@ console.log(encryptedPost)
        "ringsize": 2,
       "transfers":[
         {
-          "destination":"apollo",
+          "destination":form.address,
           "amount":1,
           "payload_rpc":[{
                   "name": "key",
@@ -112,21 +130,12 @@ setSearchParams({"status":"success"})
         <div className="function">
    {searchParams.get("status")=="success"?"Success!":   <div>
         <h1>Dero Forms</h1>
+        {form&&form.title}
+        
     
     <form onSubmit={handleSubmit}>
-      
-        <input placeholder="your discord username" id="discord" type="text"/>
-        <p>How much experience do you have with programming generally?</p>
-        <select id="pexp"><option value="0">Utter Noob</option><option value="1">Some</option><option value="2">A Lot</option><option value="3">Veteran</option></select>
-        <p>Is English your first language?</p>
-        <select id="english"><option value="0">No</option><option value="1">Yes</option></select>
-        <p>How much experience do you have with JS React?</p>
-        <select id="rexp"><option value="0">Utter Noob</option><option value="1">Some</option><option value="2">A Lot</option><option value="3">Veteran</option></select>
-        <p>How much experience do you have with Dero generally?</p>
-        <select id="dexp"><option value="0">Utter Noob</option><option value="1">Some</option><option value="2">A Lot</option><option value="3">Veteran</option></select>
-
-    <textarea placeholder="What are you hoping to get out of this course?" rows="44" cols="80" id="hope">
-</textarea>
+      {form&&form.questions.map((x,i)=><><p>{x.question}</p><input type="text" id={`question_${i}`}/></>)}
+     
 
       <button type={"submit"}>Submit</button>
     </form>

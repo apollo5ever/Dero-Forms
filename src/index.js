@@ -8,6 +8,9 @@ import App from './App';
 
 
 import {LoginProvider} from './LoginContext'
+import Form from './components/form';
+import Responses from './components/responses';
+import CreateForm from './components/createForm';
 
 
 
@@ -19,6 +22,9 @@ ReactDOM.render(
   <HashRouter>
   <Routes className="main">
     <Route path="/" element={<App/>}>
+      <Route path="/createForm" element={<CreateForm/>}/>
+      <Route path="/:cid" element={<Form/>}/>
+      <Route path="/responses" element={<Responses/>}/>
 
     </Route>
   </Routes>

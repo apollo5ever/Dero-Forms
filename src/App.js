@@ -10,6 +10,7 @@ import {LoginContext} from './LoginContext'
 import to from 'await-to-js'
 
 import PublishPost from './components/publishPost';
+import CreateForm from './components/createForm';
 
 
 
@@ -34,15 +35,7 @@ function App() {
     return str;
 }
 
-  const getSCID2 = async ()=>{
-    setState(state=>({...state,scid:"99a8c70cfae03541a4c0e85854c23a83f0aa78727a1f921d55960cc90c9df1b5",coco:"bf80416cdb679ea49a2f27efe23b6d77eb70ece51e07fcaf3bce1a11413cec99"}))
-    const ipfsboy = await IPFS.create()
-       const validIp4 = '/ip4/64.225.105.42/tcp/4001/p2p/QmPo1ygpngghu5it8u4Mr3ym6SEU2Wp2wA66Z91Y1S1g29'
-    const rez = await ipfsboy.bootstrap.add(validIp4)
-    const config = await ipfsboy.config.getAll()
-    setState(state=>({...state,ipfs:ipfsboy}))
-      }
-  
+
   const getSCID = React.useCallback(async () => {
       
     const deroBridgeApi = deroBridgeApiRef.current
@@ -134,9 +127,7 @@ console.info(cid.toString())
 
   
 
-React.useEffect(()=>{
-  getIslands();
-},[state.deroBridgeApiRef,state.ipfs,state.userAddress])
+
 
 
 
@@ -218,7 +209,7 @@ React.useEffect(()=>{
     <div className="App">
       
     
-<PublishPost/>
+<div className="navbar"><NavLink to={`/createForm`}>Create Form</NavLink><NavLink to={`/responses`}>View Responses</NavLink></div>
 
      <Outlet />
 
