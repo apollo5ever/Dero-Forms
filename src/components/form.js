@@ -134,7 +134,9 @@ setSearchParams({"status":"success"})
         
     
     <form onSubmit={handleSubmit}>
-      {form&&form.questions.map((x,i)=><><p>{x.question}</p><input type="text" id={`question_${i}`}/></>)}
+      {form&&form.questions.map((x,i)=><><p>{x.question}</p>{x.type=="multi"?<select id={`question_${i}`}><option value="a">{x.option_a}</option><option value="b">{x.option_b}</option><option value="c">{x.option_c}</option><option value="d">{x.option_d}</option></select>
+      :x.type=="long"?<textarea rows="12" cols="40" id={`question_${i}`}/>
+      :<input type="text" id={`question_${i}`}/>}</>)}
      
 
       <button type={"submit"}>Submit</button>

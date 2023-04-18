@@ -32,13 +32,19 @@ function hex2a(hex){
 
  const handleSubmit = async e => {
     e.preventDefault()
+    console.log("get response")
+    console.log(state.ipfs)
+    console.log(e.target.cid.value)
     
   let encryptedResponse
     for await (const buf of state.ipfs.cat(e.target.cid.value.toString())){
+      console.log("awaiting buf")
       encryptedResponse = buf.toString()
+      console.log(encryptedResponse)
     }
     let decryptedResponse=CryptoJS.AES.decrypt(encryptedResponse.substring(1,encryptedResponse.length-1),e.target.key.value).toString()
     let response = JSON.parse(hex2a(decryptedResponse))
+    console.log(response)
  setResponse(response)
     
    

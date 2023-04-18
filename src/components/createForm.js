@@ -16,9 +16,81 @@ export default function CreateForm(){
 const [searchParams,setSearchParams] = useSearchParams()
 const [state,setState] = React.useContext(LoginContext)
 //const [surveyLength,setSurveyLength] = React.useState(1)
-const [qArray,setQArray] = React.useState([<input type="text" placeholder="Question 1" id={`question_${0}`} />])
+const [qArray, setQArray] = React.useState([
+  <div>
+    <input type="text" placeholder="Question 1" id={`question_${0}`} />
+    <select
+      id={`question_${0}_type`}
+      onChange={(e) => handleQuestionTypeChange(e, 0)}
+    >
+      <option value="short">Short Answer</option>
+      <option value="long">Long Answer</option>
+      <option value="multi">Multiple Choice</option>
+    </select>
+  </div>,
+]);
 const [cid,setCid] = React.useState(null)
 
+
+const handleQuestionTypeChange = (e, index) => {
+  const newQArray = [...qArray];
+
+  // Get the selected question type
+  const questionType = e.target.value;
+
+  if (questionType === "multi") {
+    // If the selected question type is "multiple choice", add 4 new input fields
+    const newInputs = [];
+    for (let i = 1; i <= 4; i++) {
+      newInputs.push(
+        <input
+          type="text"
+          placeholder={`Option ${i}`}
+          id={`question_${index}_option_${i}`}
+        />
+      );
+    }
+    newQArray[index] = (
+      <div>
+        <input
+          type="text"
+          placeholder={`Question ${index + 1}`}
+          id={`question_${index}`}
+        />
+        <select
+          id={`question_${index}_type`}
+          onChange={(e) => handleQuestionTypeChange(e, index)}
+        >
+          <option value="short">Short Answer</option>
+          <option value="long">Long Answer</option>
+          <option value="multi">Multiple Choice</option>
+        </select>
+        {newInputs}
+      </div>
+    );
+  } else {
+    // If the selected question type is not "multiple choice", remove any additional input fields
+    newQArray[index] = (
+      <div>
+        <input
+          type="text"
+          placeholder={`Question ${index + 1}`}
+          id={`question_${index}`}
+        />
+        <select
+          id={`question_${index}_type`}
+          onChange={(e) => handleQuestionTypeChange(e, index)}
+        >
+          <option value="short">Short Answer</option>
+          <option value="long">Long Answer</option>
+          <option value="multi">Multiple Choice</option>
+        </select>
+      </div>
+    );
+  }
+
+  setQArray(newQArray);
+}; 
   
 
 const newSubmit = async e =>{
@@ -29,7 +101,12 @@ const newSubmit = async e =>{
 
   for(var i=0; i<qArray.length;i++){
     console.log(e.target[`question_${i}`].value)
-    form.questions.push(new Object({question:e.target[`question_${i}`].value}))
+    if(e.target[`question_${i}_type`].value=="multi"){
+      form.questions.push(new Object({question:e.target[`question_${i}`].value,type:e.target[`question_${i}_type`].value,option_a:e.target[`question_${i}_option_1`].value,option_b:e.target[`question_${i}_option_2`].value,option_c:e.target[`question_${i}_option_3`].value,option_d:e.target[`question_${i}_option_4`].value}))
+    }else{
+      form.questions.push(new Object({question:e.target[`question_${i}`].value,type:e.target[`question_${i}_type`].value}))
+    }
+    
   }
 
   console.log(form)
@@ -78,7 +155,21 @@ const newSubmit = async e =>{
     <form onSubmit={newSubmit}>
       
         <input placeholder="form title" id="title" type="text"/>
-        {qArray}<div className="add" onClick={()=>setQArray([...qArray,<input type="text" placeholder={`Question ${qArray.length+1}`} id={`question_${qArray.length}`}/>])}>+</div>
+        {qArray}<div className="add" onClick={()=>setQArray([...qArray,<div>
+            <input
+              type="text"
+              placeholder={`Question ${qArray.length + 1}`}
+              id={`question_${qArray.length}`}
+            />
+            <select
+              id={`question_${qArray.length}_type`}
+              onChange={(e) => handleQuestionTypeChange(e, qArray.length)}
+            >
+              <option value="short">Short Answer</option>
+              <option value="long">Long Answer</option>
+              <option value="multi">Multiple Choice</option>
+            </select>
+          </div>])}>+</div>
 
       <button type={"submit"}>Submit</button>
     </form>

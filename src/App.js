@@ -39,18 +39,7 @@ function App() {
   const getSCID = React.useCallback(async () => {
       
     const deroBridgeApi = deroBridgeApiRef.current
-    const [err,res] = await to(deroBridgeApi.daemon('get-sc',{
-      "scid": "0000000000000000000000000000000000000000000000000000000000000001",
-      "keysstring":["keystore"]
-    }))
-    let keystore_scid= "80"+res.data.result.valuesstring[0].substring(2,64)
-    const [err2,res2] = await to(deroBridgeApi.daemon('get-sc',{
-      "scid": keystore_scid,
-      "keysstring":["k:private.islands.scid","k:private.islands.coco"]
-    }))
-    let scid = res2.data.result.valuesstring[0]
-    let coco = res2.data.result.valuesstring[1]
-    setState(state=>({...state,scid:scid,coco:coco}))
+    
   
     const ipfsboy = await IPFS.create()
    
@@ -62,45 +51,7 @@ function App() {
     setState(state=>({...state,ipfs:ipfsboy}))
   })
  
-  const getIslands = React.useCallback(async () => {
-    console.log("GET ISLANDS")
-    const deroBridgeApi = state.deroBridgeApiRef.current
 
-
-  const [err,res] = await to(deroBridgeApi.daemon('get-sc',{
-    "scid": state.scid,
-    "variables":true
-  }))
-  
-
-  var search= new RegExp(`.*_O`)  
-  console.log("search",search)
-  var scData = res.data.result.stringkeys //.map(x=>x.match(search))
-console.log(scData)
-var myIslands=[]
-
-const myList=Object.keys(scData)
-  .filter(key => search.test(key))
-  .filter(key=>hex2a(scData[key])==state.userAddress)
-  .map(key=>new Object({name:key.substring(0,key.length-2),meta:hex2a(scData[`${key.substring(0,key.length-2)}_M`]),j:scData[`${key.substring(0,key.length-2)}_j`]}))
-   console.log("MY LIST",myList)
-  for(var i=0; i<myList.length;i++){
-    let k = myList[i].meta
-    let j=myList[i].j
-     for await (const buf of state.ipfs.cat(k)){
-      let m = await JSON.parse(buf.toString())
-      m.j=j
-    myIslands.push(m)
-    
-  }
-}
-
-
- 
-  setState(state=>({...state,myIslands:myIslands,active:0}))
-
-  
-})
  /* const meta= async()=>{
     console.log("meta")
     const node = await IPFS.create({repo: 'ok'+ Math.random()})
@@ -143,7 +94,7 @@ console.info(cid.toString())
         setState(state=>({...state,deroBridgeApiRef:deroBridgeApiRef}))
         getAddress();
         getSCID();
-        getRandom();
+       
         
         
       }
@@ -171,37 +122,10 @@ console.info(cid.toString())
    }
     })
 
-    const getRandom = React.useCallback(async () => {
-      const deroBridgeApi = deroBridgeApiRef.current
-      
-  
-      const [err0, res0] = await to(deroBridgeApi.daemon('get-random-address', {
-       
-     }))
-  
-   
-     
-     console.log("get-random-address-error",err0)
-     console.log(res0)
-     if(err0 == null){
-     setState(state=>({...state,randomAddress:res0.data.result.address[0]}))
-      
-     }
-      })
 
-    const getCocoBalance = React.useCallback(async () => {
-      
-      const deroBridgeApi = deroBridgeApiRef.current
-      const [err,res] = await to(deroBridgeApi.wallet('get-balance',{
-        "scid": state.coco
-      }))
-      console.log("balance:", res.data.result.balance)
-      setState(state=>({...state,cocoBalance:res.data.result.balance}))
-    })
 
-React.useEffect(()=>{
-  getCocoBalance();
-},[state.scid,state.userAddress])
+
+
 
 
   return (
